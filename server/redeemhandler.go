@@ -15,9 +15,16 @@ func (s Server) RedeemPoints(ctx *fiber.Ctx) error {
 	err := s.Feature.RedeemPoints(req)
 
 	if err != nil {
-		return err
+		return ctx.Status(fiber.StatusOK).JSON(models.Resposnse{
+			Success: false,
+			Message: "error al redimir puntos",
+		})
+
 	}
 
-	return ctx.Status(fiber.StatusOK).SendString("premio reclamado con exito ")
+	return ctx.Status(fiber.StatusOK).JSON(models.Resposnse{
+		Success: true,
+		Message: "puntos redimidos con exito",
+	})
 
 }

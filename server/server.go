@@ -5,6 +5,7 @@ import (
 	"api-points/features"
 
 	"github.com/gofiber/fiber/v2"
+	"github.com/gofiber/fiber/v2/middleware/cors"
 )
 
 type Server struct {
@@ -24,6 +25,10 @@ func (s Server) Run() error {
 	app := fiber.New()
 
 	s.RegisterRoute(app)
-
+	app.Use(cors.New(cors.Config{
+		AllowOrigins:     "*",
+		AllowMethods:     "HEAD,GET,POST,PUT,DELETE,PATCH",
+		AllowCredentials: false,
+	}))
 	return app.Listen(s.cfg.Host)
 }

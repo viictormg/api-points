@@ -8,3 +8,13 @@ type Point struct {
 	Add         bool   `json:"add" bson:"add"`
 	Award       string `json:"award,omitempty" bson:"award,omitempty"`
 }
+
+type ResponseHistoryPoints struct {
+	Customer Customer `json:"customer"`
+	Points   []Point  `json:"poins"`
+}
+
+type Resposnse struct {
+	Success bool   `json:"success"`
+	Message string `json:"message"`
+}

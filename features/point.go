@@ -47,3 +47,22 @@ func (feat Feature) CalculatePoint(point *models.Point) error {
 func (feat Feature) UpdateCurrenPoint(customer models.Customer) error {
 	return feat.db.UpdateCustomer(customer)
 }
+
+func (feat Feature) GetHistoryPoints(idCustomer string) (models.ResponseHistoryPoints, error) {
+	customer, err := feat.db.FindCustomer(idCustomer)
+
+	if err != nil {
+		return models.ResponseHistoryPoints{}, err
+	}
+
+	points, err := feat.db.GetPoints(idCustomer)
+
+	if err != nil {
+		return models.ResponseHistoryPoints{}, err
+	}
+
+	return models.ResponseHistoryPoints{
+		Customer: customer,
+		Points:   points,
+	}, nil
+}

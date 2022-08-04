@@ -23,5 +23,15 @@ func (s Server) SavePoint(ctx *fiber.Ctx) error {
 	}
 
 	return ctx.Status(fiber.StatusOK).SendString("puntos cargados con exito ")
+}
 
+func (s Server) GetHistoryPoints(ctx *fiber.Ctx) error {
+	idCustomer := "1d1326a8-12d5-11ed-ab31-9828a64b41f5"
+	response, err := s.Feature.GetHistoryPoints(idCustomer)
+
+	if err != nil {
+		return err
+	}
+
+	return ctx.Status(fiber.StatusOK).JSON(response)
 }
